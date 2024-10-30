@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 </head>
 <body>
-    
-    @include('layouts.topbar')
+    @auth
+        <x-user-bar />{{-- Exibindo o componente se estiver autenticado --}}
+    @else
+        @include('layouts.topbar')
+    @endauth
 
     @yield('content')
 
