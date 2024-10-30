@@ -9,5 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticable;
 /** Definindo para usar a autenticação do Laravel */
 class User extends Authenticable
 {
-    //
+    // Um usuário pode ter vários posts
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
