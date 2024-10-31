@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class MainController extends Controller
@@ -19,12 +20,26 @@ class MainController extends Controller
 
     public function update($id)
     {
-        // update post
-        echo 'update_post';
+        $post = Post::find($id);
+
+        // verify if the user is allowed to update the post
+        if (Auth::user()->can('update', $post)) {
+            echo 'O usuário pode atualizar esse post!';
+        } else {
+            echo 'O usuário não pode atualizar esse post!';
+        }
+
     }
 
     public function delete($id)
     {
-        echo 'delete_post';
+         $post = Post::find($id);
+
+         // verify if the user is allowed to delete the post
+         if (Auth::user()->can('delete', $post)) {
+             echo 'O usuário pode deletar esse post!';
+         } else {
+             echo 'O usuário não pode deletar esse post!';
+         }
     }
 }
