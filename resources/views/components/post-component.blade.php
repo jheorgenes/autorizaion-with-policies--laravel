@@ -16,7 +16,10 @@
     <div class="d-flex justify-content-end gap-5">
         {{-- Com o Policies ativo, basta fazer a validação com os metodos propostos e passar os argumentos solicitados --}}
         @can('update', $post)
-            <a href="#" class="btn btn-primary">Edit post</a>
+            <a href="{{ route('post_update', ['id' => $post->id]) }}" class="btn btn-primary">Edit post</a>
+        @endcan
+        @can('delete', $post)
+            <a href="{{ route('post_delete', ['id' => $post->id]) }}" class="btn btn-danger">Delete post</a>
         @endcan
     </div>
 </div>

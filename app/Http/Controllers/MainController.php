@@ -16,4 +16,15 @@ class MainController extends Controller
         // return view('home', ['posts' => $posts]);
         return view('home', compact('posts'));
     }
+
+    public function update($id)
+    {
+        // update post
+        echo 'update_post';
+    }
+
+    public function delete($id)
+    {
+        echo 'delete_post';
+    }
 }
