@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col">
                 @foreach ($posts as $post)
-                    <x-post-component :post=$post />
+                    <x-post-component :post="$post" />
                 @endforeach
             </div>
         </div>

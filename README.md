@@ -18,3 +18,9 @@ Executando as seeders
 $ php artisan db:seed --class=UserSeeder
 $ php artisan db:seed --class=PostSeeder
 ```
+
+## Gerando uma Policies
+
+```sh
+$ php artisan make:policy <namePolicy> --model=<Model>
+```
