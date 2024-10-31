@@ -18,6 +18,23 @@ class MainController extends Controller
         return view('home', compact('posts'));
     }
 
+    public function create()
+    {
+        // Para identificar qual Policies será usada, informe qual classe Model essa validação se aplicará, igual ao exemplo abaixo.
+        if (Auth::user()->can('create', Post::class)) {
+            echo 'O usuário pode criar o post!';
+        } else {
+            echo 'O usuário não pode criar o post!';
+        }
+
+        // // Esse código também funcionaria assim
+        // if (Gate::allows('create', Post::class)) {
+        //     echo 'O usuário pode criar o post!';
+        // } else {
+        //     echo 'O usuário não pode criar o post!';
+        // }
+    }
+
     public function update($id)
     {
         $post = Post::find($id);
