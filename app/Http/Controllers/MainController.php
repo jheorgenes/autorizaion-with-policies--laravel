@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class MainController extends Controller
@@ -21,11 +22,11 @@ class MainController extends Controller
     public function create()
     {
         // Para identificar qual Policies será usada, informe qual classe Model essa validação se aplicará, igual ao exemplo abaixo.
-        if (Auth::user()->can('create', Post::class)) {
-            echo 'O usuário pode criar o post!';
-        } else {
-            echo 'O usuário não pode criar o post!';
-        }
+        // if (Auth::user()->can('create', Post::class)) {
+        //     echo 'O usuário pode criar o post!';
+        // } else {
+        //     echo 'O usuário não pode criar o post!';
+        // }
 
         // // Esse código também funcionaria assim
         // if (Gate::allows('create', Post::class)) {
@@ -33,6 +34,26 @@ class MainController extends Controller
         // } else {
         //     echo 'O usuário não pode criar o post!';
         // }
+
+        // //------------------------------
+        // $response = Gate::inspect('create', Post::class);
+
+        // if($response->allowed()){
+        //     echo 'O usuário pode criar o post!';
+        // } else {
+        //     echo $response->message();
+        // }
+
+        //---------------------------------
+        $response = Gate::inspect('create', Post::class);
+
+        if($response->allowed()){
+            echo 'O usuário pode criar o post!';
+        } else {
+            if($response->status() === 403){
+                abort(403, $response->message());
+            }
+        }
     }
 
     public function update($id)
